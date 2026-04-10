@@ -1,0 +1,6 @@
+fastapi>=0.115
+uvicorn>=0.30
+python-socketio>=5.11
+sqlalchemy>=2.0
+pydantic>=2.7
+yt-dlp>=2025.1.0

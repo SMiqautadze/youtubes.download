@@ -1,0 +1,14 @@
+.git
+.gitignore
+.codex
+.pytest_cache/
+__pycache__/
+tests/
+youtubes.download/
+runtime/data/*.db
+runtime/downloads/*
+runtime/temp/*
+!runtime/data/.gitkeep
+!runtime/downloads/.gitkeep
+!runtime/temp/.gitkeep
+backups/

@@ -1,0 +1,14 @@
+__pycache__/
+.pytest_cache/
+.codex
+*.pyc
+*.pyo
+*.pyd
+.venv/
+backups/
+runtime/data/*.db
+runtime/downloads/*
+runtime/temp/*
+!runtime/data/.gitkeep
+!runtime/downloads/.gitkeep
+!runtime/temp/.gitkeep
