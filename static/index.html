@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>youtubes.download</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=1">
+    <link rel="shortcut icon" href="/favicon.svg?v=1">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="toast-container"></div>
+    <div class="app-container">
+        <header class="logo-header">
+            <a id="brandHomeLink" href="/" class="brand-wordmark-shell" aria-label="Return to main screen">
+                <div class="brand-wordmark-cut" aria-hidden="true"></div>
+                <h1 class="brand-wordmark">
+                    <span class="brand-wordmark-text">youtubes.download</span>
+                </h1>
+            </a>
+        </header>
+
+        <div class="main-card-wrapper">
+            <div class="main-card">
+                <div class="controls-row">
+                    <div class="url-entry-group flex-grow">
+                        <input type="text" id="urlInput" placeholder="Paste Video Link Here" class="glass-input flex-grow">
+                        <button id="pasteBtn" type="button" class="paste-btn">Paste</button>
+                    </div>
+
+                    <div class="playlist-toggle-wrapper">
+                        <span class="toggle-label">PLAYLIST</span>
+                        <label class="switch">
+                            <input type="checkbox" id="playlistToggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div id="formatDropdown" class="custom-dropdown quality-dropdown" data-value="mp3-320">
+                        <button id="formatDropdownTrigger" type="button" class="dropdown-trigger quality-dropdown-trigger" aria-haspopup="listbox" aria-expanded="false">
+                            <span id="formatDropdownLabel">MP3 320 Kbps</span>
+                            <span class="dropdown-chevron" aria-hidden="true"></span>
+                        </button>
+                        <div id="formatDropdownMenu" class="dropdown-menu quality-dropdown-menu" role="listbox" aria-label="Quality">
+                            <button type="button" class="dropdown-option" data-dropdown="format" data-value="mp3-320" role="option" aria-selected="true">MP3 320 Kbps</button>
+                            <button type="button" class="dropdown-option" data-dropdown="format" data-value="mp3-192" role="option" aria-selected="false">MP3 192 Kbps</button>
+                            <button type="button" class="dropdown-option" data-dropdown="format" data-value="mp3-128" role="option" aria-selected="false">MP3 128 Kbps</button>
+                            <button type="button" class="dropdown-option" data-dropdown="format" data-value="mp4-720" role="option" aria-selected="false">MP4 720p</button>
+                            <button type="button" class="dropdown-option" data-dropdown="format" data-value="mkv-1080" role="option" aria-selected="false">MKV 1080p</button>
+                            <button type="button" class="dropdown-option" data-dropdown="format" data-value="mkv-2k" role="option" aria-selected="false">MKV 2K</button>
+                            <button type="button" class="dropdown-option" data-dropdown="format" data-value="mkv-4k" role="option" aria-selected="false">MKV 4K</button>
+                            <button type="button" class="dropdown-option" data-dropdown="format" data-value="mkv-8k" role="option" aria-selected="false">MKV 8K</button>
+                        </div>
+                    </div>
+
+                    <button id="downloadBtn" class="download-btn">DOWNLOAD</button>
+                </div>
+            </div>
+        </div>
+
+        <main class="content-sections">
+            <section class="section">
+                <div class="dashed-box" id="activeDownloadsContainer">
+                    <p class="empty-text">Active Downloads</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="history-header">
+                    <div class="search-box history-search-box">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <input type="text" id="historySearch" placeholder="Search history...">
+                    </div>
+                    <div class="history-toolbar">
+                        <div class="tag" id="ytdlpTag">yt-dlp checking...</div>
+                        <button id="clearHistoryBtn" class="soft-btn danger">
+                            Delete files
+                        </button>
+                        <div class="toolbar-cleanup-control">
+                            <span class="toolbar-control-label">Auto Cleanup</span>
+                            <div id="autoCleanupDropdown" class="custom-dropdown cleanup-dropdown" data-value="off">
+                                <button id="autoCleanupDropdownTrigger" type="button" class="dropdown-trigger cleanup-dropdown-trigger" aria-haspopup="listbox" aria-expanded="false">
+                                    <span id="autoCleanupDropdownLabel">Off</span>
+                                    <span class="dropdown-chevron" aria-hidden="true"></span>
+                                </button>
+                                <div id="autoCleanupDropdownMenu" class="dropdown-menu cleanup-dropdown-menu" role="listbox" aria-label="Auto Cleanup">
+                                    <button type="button" class="dropdown-option" data-dropdown="cleanup" data-value="off" role="option" aria-selected="true">Off</button>
+                                    <button type="button" class="dropdown-option" data-dropdown="cleanup" data-value="1h" role="option" aria-selected="false">1 Hour</button>
+                                    <button type="button" class="dropdown-option" data-dropdown="cleanup" data-value="1d" role="option" aria-selected="false">1 day</button>
+                                    <button type="button" class="dropdown-option" data-dropdown="cleanup" data-value="1w" role="option" aria-selected="false">1 week</button>
+                                    <button type="button" class="dropdown-option" data-dropdown="cleanup" data-value="1m" role="option" aria-selected="false">1 month</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>VIDEO TITLE</th>
+                                <th>QUALITY</th>
+                                <th class="text-center">FILE</th>
+                                <th class="text-center">RETRY</th>
+                                <th class="text-right">DATE/TIME</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody"></tbody>
+                    </table>
+                </div>
+                <div id="historyCards" class="history-cards"></div>
+                <div id="paginationContainer" class="pagination-container"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
